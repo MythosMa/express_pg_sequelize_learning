@@ -1,0 +1,7 @@
+{
+  "username": "ENV_DB_USER",
+  "password": "ENV_DB_PASSWORD",
+  "database": "ENV_DB",
+  "host": "ENV_DB_HOST",
+  "dialect": "postgres"
+}
