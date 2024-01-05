@@ -1,10 +1,11 @@
-const UsersModel = require("../models").Users;
+const UserModel = require("../models").User;
+const dayjs = require("dayjs");
 
-module.exports.signupUser = function (user) {
+module.exports.signupUser = async function (user) {
   if (!user.username || !user.password || !user.realName) {
     return Promise.reject("缺少必要信息");
   }
-  return UsersModel.create({
+  return UserModel.create({
     ...user,
   })
     .then((userResult) => {
@@ -12,9 +13,10 @@ module.exports.signupUser = function (user) {
         userResult && typeof userResult === "object"
           ? userResult.toJSON()
           : userResult;
-      const data = {};
-
-      return data;
+      return {
+        ...userResultJson,
+        password: undefined,
+      };
     })
     .catch((error) => {
       throw error;

@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var resposeMiddleware = require('./middleware/responseMiddleware');
 
 var indexRouter = require('./routes/index');
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(resposeMiddleware);
 
 app.use('/', indexRouter);
 
@@ -34,7 +36,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send(err);
+  res.json(null, -1, err);
 });
 
 app.listen(9999)

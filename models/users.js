@@ -1,5 +1,5 @@
 const { Model } = require("sequelize");
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require("bcrypt-nodejs");
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -10,30 +10,33 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.belongsTo(models.Roles, {
-        foreignKey: "roleId",
-        as: "role",
+      User.belongsTo(models.Role, {
+        allowNull: true,
       });
     }
   }
   User.init(
     {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       username: DataTypes.STRING,
       password: DataTypes.STRING,
       realName: DataTypes.STRING,
       email: DataTypes.STRING,
       phone: DataTypes.STRING,
-      createTime: DataTypes.DATE,
       lastLoginTime: DataTypes.DATE,
     },
     {
       sequelize,
-      modelName: "Users",
+      modelName: "User",
     }
   );
 
   User.beforeSave((user) => {
-    if (user.changed('password')) {
+    if (user.changed("password")) {
       user.password = bcrypt.hashSync(
         user.password,
         bcrypt.genSaltSync(10),

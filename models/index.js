@@ -33,9 +33,10 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
-Object.keys(db).forEach((modelName) => {
+Object.keys(db).forEach(async (modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
+    await db[modelName].sync()
   }
 });
 

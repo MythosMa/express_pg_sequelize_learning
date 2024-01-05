@@ -2,5 +2,6 @@
   "username": "ENV_DB_USER",
   "password": "ENV_DB_PASSWORD",
   "database": "ENV_DB",
-  "host": "ENV_DB_HOST"
+  "host": "ENV_DB_HOST",
+  "port": "ENV_DB_PORT"
 }
