@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
       },
       roleName: DataTypes.STRING,
+      roleCode: DataTypes.STRING,
     },
     {
       sequelize,

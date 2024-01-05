@@ -13,10 +13,6 @@ config = Object.assign(
 
 const db = {};
 
-console.log("config============")
-console.log(config)
-console.log("config============")
-
 let sequelize = new Sequelize({ ...config, dialect: "postgres" });
 
 fs.readdirSync(__dirname)
@@ -36,7 +32,7 @@ fs.readdirSync(__dirname)
 Object.keys(db).forEach(async (modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
-    await db[modelName].sync()
+    await db[modelName].sync({ alter: true });
   }
 });
 
