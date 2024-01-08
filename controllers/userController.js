@@ -1,5 +1,6 @@
 const UserModel = require("../models").User;
 const dayjs = require("dayjs");
+const { UniqueConstraintError } = require("sequelize");
 
 module.exports.signupUser = async function (user) {
   return UserModel.create({
@@ -16,6 +17,20 @@ module.exports.signupUser = async function (user) {
       };
     })
     .catch((error) => {
-      throw error;
+      const errorData = {
+        status: 500,
+        data: null,
+        result: -1,
+        message: "服务器错误：" + error,
+      };
+      if (error instanceof UniqueConstraintError) {
+        errorData = {
+          status: 409,
+          data: null,
+          result: -1,
+          message: "用户已存在",
+        };
+      }
+      return Promise.reject(errorData);
     });
 };
