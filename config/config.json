@@ -3,5 +3,6 @@
   "password": "ENV_DB_PASSWORD",
   "database": "ENV_DB",
   "host": "ENV_DB_HOST",
-  "port": "ENV_DB_PORT"
+  "port": "ENV_DB_PORT",
+  "dbbrand": "ENV_DB_BRAND"
 }

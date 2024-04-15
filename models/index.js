@@ -13,7 +13,7 @@ config = Object.assign(
 
 const db = {};
 
-let sequelize = new Sequelize({ ...config, dialect: "postgres" });
+let sequelize = new Sequelize({ ...config, dialect: config.dbbrand });
 
 fs.readdirSync(__dirname)
   .filter(
